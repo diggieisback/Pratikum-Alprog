@@ -7,7 +7,7 @@ void calc(bool isFirst,int choice,double lastSum);
 double pertambahan(double num1,double num2);
 double pengurangan(double num1,double num2);
 double perkalian(double num1,double num2);
-double pembagian(double num1,double num2);
+double pembagian(double num1,double num2,double lastSum);
 int modulus(double num1,double num2);
 
 int main(){
@@ -55,14 +55,17 @@ void calc(bool isFirst,int choice,double lastSum){
             sum = perkalian(num1,num2);
             break;
         case 4:
-            sum = pembagian(num1,num2);
+            sum = pembagian(num1,num2,lastSum);
             break;
         case 5:
             sum = modulus(num1,num2);
             break;
     }
     system("cls");
-    printf("Hasil operasi :%.4lf",sum);
+    if(choice == 4 && num2 == 0){
+        printf("Error,cannot divide by zero \n");
+    }
+    printf("Hasil operasi terakhir:%.4lf",sum);
     menu(isFirst,sum);
 }
 
@@ -78,8 +81,12 @@ double perkalian(double num1,double num2){
     return num1*num2;
 }
 
-double pembagian(double num1,double num2){
+double pembagian(double num1,double num2,double lastSum){
+    if (num2 == 0){
+        return lastSum;
+    } else {
     return num1/num2;
+    }
 }
 
 int modulus(double num1,double num2){
