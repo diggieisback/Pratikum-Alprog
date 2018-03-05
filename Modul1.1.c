@@ -4,7 +4,11 @@
 
 void menu(bool isFirst,double lastSum);
 void calc(bool isFirst,int choice,double lastSum);
-double pertambahan(int num1,int num2);
+double pertambahan(double num1,double num2);
+double pengurangan(double num1,double num2);
+double perkalian(double num1,double num2);
+double pembagian(double num1,double num2);
+int modulus(double num1,double num2);
 
 int main(){
     bool isFirst = true;
@@ -35,6 +39,7 @@ void calc(bool isFirst,int choice,double lastSum){
     }
     else {
         num1 = lastSum;
+        printf("Hasil terakhir : %.2lf\n",num1);
         printf("Masukkan angka kedua : ");
         scanf("%lf",&num2);
     }
@@ -45,12 +50,38 @@ void calc(bool isFirst,int choice,double lastSum){
             break;
         case 2 :
             sum = pengurangan(num1,num2);
+            break;
+        case 3:
+            sum = perkalian(num1,num2);
+            break;
+        case 4:
+            sum = pembagian(num1,num2);
+            break;
+        case 5:
+            sum = modulus(num1,num2);
+            break;
     }
     system("cls");
-    printf("Hasil operasi :%lf",sum);
+    printf("Hasil operasi :%.4lf",sum);
     menu(isFirst,sum);
 }
 
-double pertambahan(int num1,int num2){
+double pertambahan(double num1,double num2){
     return num1 + num2;
+}
+
+double pengurangan(double num1,double num2){
+    return num1-num2;
+}
+
+double perkalian(double num1,double num2){
+    return num1*num2;
+}
+
+double pembagian(double num1,double num2){
+    return num1/num2;
+}
+
+int modulus(double num1,double num2){
+    return (int)num1%(int)num2;
 }
