@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <ctype.h>
+
 
 void menu(bool isFirst,double lastSum);
 void calc(bool isFirst,int choice,double lastSum);
