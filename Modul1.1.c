@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 void menu(bool isFirst,double lastSum);
 void calc(bool isFirst,int choice,double lastSum);
@@ -9,6 +10,9 @@ double pengurangan(double num1,double num2);
 double perkalian(double num1,double num2);
 double pembagian(double num1,double num2,double lastSum);
 int modulus(double num1,double num2);
+void clear_buffer();
+double input();
+
 
 int main(){
     bool isFirst = true;
@@ -33,15 +37,15 @@ void calc(bool isFirst,int choice,double lastSum){
     }
     else if (isFirst){
         printf("Masukkan angka pertama : ");
-        scanf("%lf",&num1);
+        num1 = input();
         printf("Masukkan angka kedua : ");
-        scanf("%lf",&num2);
+        num2 = input();
     }
     else {
         num1 = lastSum;
         printf("Hasil terakhir : %.2lf\n",num1);
         printf("Masukkan angka kedua : ");
-        scanf("%lf",&num2);
+        num2 = input();
     }
     isFirst = false;
     switch(choice){
@@ -91,4 +95,23 @@ double pembagian(double num1,double num2,double lastSum){
 
 int modulus(double num1,double num2){
     return (int)num1%(int)num2;
+}
+
+double input(){
+    double num;
+    bool valid = scanf("%lf",&num);
+    clear_buffer();
+    if (valid == 0){
+        printf("Input invalid! Masukkan angka : ");
+        return input();
+    } else {
+        return num;
+    }
+}
+
+
+void clear_buffer(){
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF) ; 
+    
 }
