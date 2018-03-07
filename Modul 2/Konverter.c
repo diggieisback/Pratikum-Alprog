@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-
+#include <stdlib.h>
 void menu();
 void binaryToDecimal();
 void decimalToBinary();
@@ -19,9 +19,9 @@ void menu(){
         case 1:
             binaryToDecimal();
             break;
-    //     case 2 :
-    //         decimalToBinary();
-    //         break;
+        case 2 :
+            decimalToBinary();
+            break;
     }
 }
 
@@ -60,16 +60,15 @@ void decimalToBinary(){
     int sumMod = angka;
     if(angka != 0 && angka != 1){
         while(sumDiv != 0){
-            sumDiv = sumDiv / 2;
             sumMod = sumDiv % 2;
+            sumDiv = sumDiv / 2;
             array[count] = sumMod;
             count ++;
-        }
-        int array[count];
-    
+        }    
     } else {
         sum = angka;
     }
-    printf("%d",sum);
-    free(array);
+    for (int i = count-1; i >= 0; i--){
+        printf("%d",array[i]);
+    }
 }
