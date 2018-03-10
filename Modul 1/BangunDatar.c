@@ -29,37 +29,47 @@ int main(){
 }
 
 void menu(){
-    int choice;
+    float choice;
+    int check;
+
     bangunDatar pilihan;
     printf("Pilih bangun datar:\n\n1.Persegi\n2.Segitiga\n3.Lingkaran\n4.Trapesium\n5.Jajar Genjang\n\nPilihan : ");
-    scanf("%d",&choice);
+    scanf("%f",&choice);
+    check = ceil(choice);
+    if (check == choice){
     //Validasi dikuatkan(input float gagal,isi huruf di belakang error)
-    switch (choice)
-    {
-        case 1:
-            pilihan = persegi();
-            break;
-        case 2:
-            pilihan = segitiga();
-            break;
-        case 3:
-            pilihan = lingkaran();
-            break;
-        case 4:
-            pilihan = trapesium();
-            break;
-        case 5:
-            pilihan = jajarGenjang();
-            break;
-        case 6 :
-            return;
-            break;
-        default:
-            system("cls");
-            printf("input invalid\n");
-            menu();
+        switch (choice)
+        {
+            case 1:
+                pilihan = persegi();
+                break;
+            case 2:
+                pilihan = segitiga();
+                break;
+            case 3:
+                pilihan = lingkaran();
+                break;
+            case 4:
+                pilihan = trapesium();
+                break;
+            case 5:
+                pilihan = jajarGenjang();
+                break;
+            case 6 :
+                return;
+                break;
+            default:
+                system("cls");
+                printf("input invalid\n");
+                menu();
+        }
+        printf("Bangun datar %s : \nLuas : %.2lf satuan\nKeliling : %.2lf satuan",pilihan.nama,pilihan.luas,pilihan.keliling);
     }
-    printf("Bangun datar %s : \nLuas : %.2lf satuan\nKeliling : %.2lf satuan",pilihan.nama,pilihan.luas,pilihan.keliling);
+    else {
+        clear_buffer();
+        printf("Input invalid!");
+        menu();
+    }
 }
 
 bangunDatar persegi(){
@@ -144,8 +154,6 @@ double input(){
         return num;
     }
 }
-
-
 
 void clear_buffer(){
     char c;
