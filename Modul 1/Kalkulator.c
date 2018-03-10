@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 
 void menu();
@@ -11,6 +13,7 @@ int modulus(double num1,double num2);
 void clear_buffer();
 void calc(int choice);
 double input();
+void reset();
 
 
 int main(){
@@ -20,19 +23,25 @@ int main(){
 }
 
 void menu(){
-    int choice;
+    float choice;
+    int check;
+    char buff;
     printf("\n\nPilih operasi:\n1.Pertambahan\n2.Pengurangan\n3.Perkalian\n4.Pembagian\n5.Modulus\n6.Exit\n\nPilihan : ");
-    scanf("%d",&choice);
-    if (choice>5 || choice < 1){
-        if (choice == 6){
-                return;
+    scanf("%f",&choice);
+    check = ceil(choice);
+    if (check == choice){
+        if (choice>5 || choice < 1){
+            if (choice == 6){
+                    return;
+            } else {
+                system("cls");
+                printf("Input invalid !");
+                menu();
+            }
         } else {
-            system("cls");
-            printf("Input invalid !");
-            menu();
+            calc(choice);
         }
-    } else {
-        calc(choice);
+        reset();
     }
 }
 
@@ -44,7 +53,6 @@ void calc(int choice){
     num1 = input();
     printf("Masukkan angka kedua : ");
     num2 = input();
-    system("cls");
     if(choice == 4 && num2 == 0){
         printf("Error,cannot divide by zero \n");
     } else {
@@ -65,7 +73,7 @@ void calc(int choice){
                     sum = modulus(num1,num2);
                     break;
             }
-        printf("%.4lf",sum);
+        printf("Hasil Perhitungan : %.4lf",sum);
     }
 }
 
@@ -105,4 +113,28 @@ void clear_buffer(){
     char c;
     while ((c = getchar()) != '\n' && c != EOF) ; 
     
+}
+
+void reset(){
+
+    int valid_reset;
+    char parameter[1];
+
+    printf("Kembali menghitung?[Y/N] ");
+    gets(parameter);
+    
+    if (!(strcmp(parameter,"Y")) || !(strcmp(parameter,"y"))){
+        
+        system("cls");
+        menu();
+
+    } else if (!(strcmp(parameter,"N")) || !(strcmp(parameter,"n"))){
+        
+        return;
+
+    } else {
+        system("cls");
+        printf("Invalid Input !\n\a");
+        reset();
+    }
 }
