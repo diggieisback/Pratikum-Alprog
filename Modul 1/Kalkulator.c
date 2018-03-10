@@ -32,7 +32,7 @@ void menu(){
     if (check == choice){
         if (choice>5 || choice < 1){
             if (choice == 6){
-                    exit(0);
+                    return;
             } else {
                 system("cls");
                 printf("Input invalid !");
@@ -40,8 +40,8 @@ void menu(){
             }
         } else {
             calc(choice);
+            reset();
         }
-        reset();
     }
     else {
         system("cls");
