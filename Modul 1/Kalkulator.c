@@ -23,16 +23,16 @@ int main(){
 }
 
 void menu(){
-    float choice;
+    double choice;
     int check;
     char buff;
     printf("\n\nPilih operasi:\n1.Pertambahan\n2.Pengurangan\n3.Perkalian\n4.Pembagian\n5.Modulus\n6.Exit\n\nPilihan : ");
-    scanf("%f",&choice);
+    choice = input();
     check = ceil(choice);
     if (check == choice){
         if (choice>5 || choice < 1){
             if (choice == 6){
-                    return;
+                    exit(0);
             } else {
                 system("cls");
                 printf("Input invalid !");
@@ -42,6 +42,11 @@ void menu(){
             calc(choice);
         }
         reset();
+    }
+    else {
+        system("cls");
+        printf("Input invalid!");
+        menu();
     }
 }
 
@@ -100,9 +105,10 @@ int modulus(double num1,double num2){
 double input(){
     double num;
     char chara;
-    if (scanf("%lf%c",&num,&chara)!= 2 || chara != '\n'){
+    if (scanf("%lf%c",&num,&chara)!= 2 && chara != '\n'){
         clear_buffer();
-        printf("Input invalid! Masukkan angka : ");
+        system("cls");
+        printf("Input invalid!\nMasukkan angka : ");
         return input();
     } else {
         return num;

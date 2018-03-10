@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 void balok();
 void bola();
@@ -7,6 +9,8 @@ void prisma();
 void tabung();
 void menu();
 double PHI=3.14;
+double input();
+void clear_buffer();
 
 int main(){
     printf("Selamat datang di program perhitungan luas permukaan dan volume bangun ruang! ");
@@ -25,22 +29,25 @@ void menu(){
         case 2:
             bola();
             break;
-        case 3:
-            limas();
-            break;
-        case 4:
-            prisma();
-            break;
+        // case 3:
+        //     limas();
+        //     break;
+        // case 4:
+        //     prisma();
+        //     break;
         case 5:
             tabung();
             break;
+        default :
+            printf("Input invalid!\n");
+            menu();
     }
 }
 
 void balok(){
     double panjang,lebar,tinggi;
     printf("Masukkan panjang balok : ");
-    scanf("%lf",&panjang);
+    panjang = input();
     printf("Masukkan lebar balok : ");
     scanf("%lf",&lebar);
     printf("Masukkan tinggi balok :");
@@ -60,9 +67,27 @@ void bola(){
 void tabung(){
     double r,t;
     printf("Masukkan panjang jari jari tabung : ");
-    scanf("%lf",r);
+    scanf("%lf",&r);
     printf("Masukkan tinggi tabung : ");
-    scanf("%lf",t);
+    scanf("%lf",&t);
     printf("\n Volume Tabung : %.2lf satuan\n",PHI*r*r*t);
-    printf("Luas permukaan Tabung %.2lf satuan\n",2*PHI*r*);
+    printf("Luas permukaan Tabung %.2lf satuan\n",2*PHI*r);
+}
+
+double input(){
+    double num;
+    bool valid = scanf("%lf",&num);
+    clear_buffer();
+    if (valid == 0){
+        printf("Input invalid!\nMasukkan angka : ");
+        return input();
+    } else {
+        return num;
+    }
+}
+
+
+void clear_buffer(){
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF) ;  
 }

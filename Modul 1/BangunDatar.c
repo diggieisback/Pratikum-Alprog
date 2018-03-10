@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct bangunDatar
 {
@@ -17,6 +19,8 @@ bangunDatar segitiga();
 bangunDatar lingkaran();
 bangunDatar jajarGenjang();
 bangunDatar trapesium();
+double input();
+void clear_buffer();
 
 
 int main(){
@@ -29,6 +33,7 @@ void menu(){
     bangunDatar pilihan;
     printf("Pilih bangun datar:\n\n1.Persegi\n2.Segitiga\n3.Lingkaran\n4.Trapesium\n5.Jajar Genjang\n\nPilihan : ");
     scanf("%d",&choice);
+    //Validasi dikuatkan(input float gagal,isi huruf di belakang error)
     switch (choice)
     {
         case 1:
@@ -46,6 +51,13 @@ void menu(){
         case 5:
             pilihan = jajarGenjang();
             break;
+        case 6 :
+            return;
+            break;
+        default:
+            system("cls");
+            printf("input invalid\n");
+            menu();
     }
     printf("Bangun datar %s : \nLuas : %.2lf satuan\nKeliling : %.2lf satuan",pilihan.nama,pilihan.luas,pilihan.keliling);
 }
@@ -54,9 +66,9 @@ bangunDatar persegi(){
     bangunDatar persegi;
     double panjang,tinggi;
     printf("Masukkan panjang : ");
-    scanf("%lf",&panjang);
+    panjang = input();
     printf("Masukkan tinggi : ");
-    scanf("%lf",&tinggi);
+    tinggi = input();
     persegi.luas = panjang * tinggi;
     persegi.keliling = 2 * (panjang + tinggi);
     strcpy(persegi.nama,"Persegi");
@@ -67,7 +79,7 @@ bangunDatar lingkaran(){
     bangunDatar lingkaran;
     double r;
     printf("Masukkan panjang jari-jari : ");
-    scanf("%lf",&r);
+    r = input();
     lingkaran.luas = PHI * r * r;
     lingkaran.keliling = 2 * PHI * r;
     strcpy(lingkaran.nama,"Lingkaran");
@@ -78,7 +90,9 @@ bangunDatar segitiga(){
     bangunDatar segitiga;
     double s1,s2,s3,s;
     printf("Masukkan semua sisi segitiga : ");
-    scanf("%lf %lf %lf",&s1,&s2,&s3);
+    s1 = input();
+    s2 = input();
+    s3 = input();
     segitiga.keliling = s1 + s2 + s3;
     s = 1.0/2.0 * segitiga.keliling;
     segitiga.luas = sqrt(s*(s-s1)*(s-s2)*(s-s3)); 
@@ -90,11 +104,11 @@ bangunDatar jajarGenjang(){
     bangunDatar jajarGenjang;
     double s1,s2,t;
     printf("Masukkan sisi alas jajar genjang : ");
-    scanf("%lf",&s1);
+    s1 = input();
     printf("Masukkan sisi miring jajar genjang : ");
-    scanf("%lf",&s2);
+    s2 = input();
     printf("Masukkan tinggi jajar genjang : ");
-    scanf("%lf", &t);
+    t = input();
     jajarGenjang.luas = s1 * t;
     jajarGenjang.keliling = 2 * s1 + 2 * s2 ;
     strcpy(jajarGenjang.nama,"Jajar Genjang");
@@ -105,15 +119,36 @@ bangunDatar trapesium(){
     bangunDatar trapesium;
     double alas,sisiSejajar,sisiLain1,sisiLain2,tinggi;
     printf("Masukkan alas : ");
-    scanf("%lf",&alas);
+    alas = input();
     printf("Masukkan sisi sejajar dengan alas : ");
-    scanf("%lf",&sisiSejajar);
+    sisiSejajar = input();
     printf("Masukkan 2 buah sisi lainnya : ");
-    scanf("%lf %lf",&sisiLain1,&sisiLain2);
+    sisiLain1 = input();
+    sisiLain2 = input();
     printf("Masukkan tinggi :");
-    scanf("%lf",&tinggi);
+    tinggi = input();
     trapesium.keliling = alas + sisiSejajar + sisiLain1 + sisiLain2;
     trapesium.luas = 1.0/2.0 * (alas + sisiSejajar) * tinggi;
     strcpy(trapesium.nama,"Trapesium");
     return trapesium;
+}
+
+double input(){
+    double num;
+    bool valid = scanf("%lf",&num);
+    clear_buffer();
+    if (valid == 0){
+        printf("Input invalid!\nMasukkan angka : ");
+        return input();
+    } else {
+        return num;
+    }
+}
+
+
+
+void clear_buffer(){
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF) ; 
+    
 }
