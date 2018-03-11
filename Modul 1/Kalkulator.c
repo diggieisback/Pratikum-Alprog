@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <ctype.h>
 
 
 void menu();
@@ -34,7 +35,6 @@ void menu(){
             if (choice == 6){
                     return;
             } else {
-                system("cls");
                 printf("Input invalid !");
                 menu();
             }
@@ -44,7 +44,6 @@ void menu(){
         }
     }
     else {
-        system("cls");
         printf("Input invalid!");
         menu();
     }
@@ -59,7 +58,11 @@ void calc(int choice){
     printf("Masukkan angka kedua : ");
     num2 = input();
     if(choice == 4 && num2 == 0){
-        printf("Error,cannot divide by zero \n");
+        printf("Pembagi nol tidak diperbolehkan \n");
+    } else if(choice == 5){
+        if(ceil(num1) != num1 || ceil(num2) != num2){
+            printf("Untuk perhitnungan modulus input integer! \n");
+        }
     } else {
         switch(choice){
                 case 1 :
@@ -105,10 +108,9 @@ int modulus(double num1,double num2){
 double input(){
     double num;
     char chara;
-    if (scanf("%lf%c",&num,&chara)!= 2 && chara != '\n'){
+    if (scanf("%lf%c",&num,&chara)!= 2 || chara != '\n' || chara == ','){
         clear_buffer();
-        system("cls");
-        printf("Input invalid!\nMasukkan angka : ");
+        printf("Input invalid! Masukkan angka : ");
         return input();
     } else {
         return num;
