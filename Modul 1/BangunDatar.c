@@ -21,7 +21,7 @@ bangunDatar jajarGenjang();
 bangunDatar trapesium();
 double input();
 void clear_buffer();
-
+void reset();
 
 int main(){
     menu();
@@ -33,41 +33,44 @@ void menu(){
     int check;
 
     bangunDatar pilihan;
-    printf("Pilih bangun datar:\n\n1.Persegi\n2.Segitiga\n3.Lingkaran\n4.Trapesium\n5.Jajar Genjang\n\nPilihan : ");
-    scanf("%f",&choice);
+    printf("Pilih bangun datar:\n\n1.Persegi\n2.Segitiga\n3.Lingkaran\n4.Trapesium\n5.Jajar Genjang\n6.Exit Program\n\nPilihan : ");
+    choice = input();
     check = ceil(choice);
     if (check == choice){
-    //Validasi dikuatkan(input float gagal,isi huruf di belakang error)
-        switch (choice)
-        {
-            case 1:
-                pilihan = persegi();
-                break;
-            case 2:
-                pilihan = segitiga();
-                break;
-            case 3:
-                pilihan = lingkaran();
-                break;
-            case 4:
-                pilihan = trapesium();
-                break;
-            case 5:
-                pilihan = jajarGenjang();
-                break;
-            case 6 :
-                return;
-                break;
-            default:
-                system("cls");
-                printf("input invalid\n");
-                menu();
+        if (choice>5 || choice < 1){
+                if (choice == 6){
+                        return;
+                } else {
+                    system("cls");
+                    printf("Input invalid !\n");
+                    menu();
+                }
+        } else {
+        //Validasi dikuatkan(input float gagal,isi huruf di belakang error)
+            switch ((int)choice)
+            {
+                case 1:
+                    pilihan = persegi();
+                    break;
+                case 2:
+                    pilihan = segitiga();
+                    break;
+                case 3:
+                    pilihan = lingkaran();
+                    break;
+                case 4:
+                    pilihan = trapesium();
+                    break;
+                case 5:
+                    pilihan = jajarGenjang();
+                    break;
+            }
+            printf("Bangun datar %s : \nLuas : %.2lf satuan\nKeliling : %.2lf satuan",pilihan.nama,pilihan.luas,pilihan.keliling);
+            reset();
         }
-        printf("Bangun datar %s : \nLuas : %.2lf satuan\nKeliling : %.2lf satuan",pilihan.nama,pilihan.luas,pilihan.keliling);
-    }
-    else {
-        clear_buffer();
-        printf("Input invalid!");
+    }else {
+        system("cls");
+        printf("Input invalid!\n");
         menu();
     }
 }
@@ -97,17 +100,23 @@ bangunDatar lingkaran(){
 }
 
 bangunDatar segitiga(){
-    bangunDatar segitiga;
+    bangunDatar bangunSegitiga;
     double s1,s2,s3,s;
     printf("Masukkan semua sisi segitiga : ");
     s1 = input();
     s2 = input();
     s3 = input();
-    segitiga.keliling = s1 + s2 + s3;
-    s = 1.0/2.0 * segitiga.keliling;
-    segitiga.luas = sqrt(s*(s-s1)*(s-s2)*(s-s3)); 
-    strcpy(segitiga.nama,"Segitiga");
-    return segitiga;
+    if(s1+ s2 == s3 || s1+s3 == s2 || s2 + s3 ==s1){
+        system("cls");
+        printf("Input invalid\n");
+        return segitiga();
+    }else{
+        bangunSegitiga.keliling = s1 + s2 + s3;
+        s = 0.5 * bangunSegitiga.keliling;
+        bangunSegitiga.luas = sqrt(s*(s-s1)*(s-s2)*(s-s3)); 
+        strcpy(bangunSegitiga.nama,"Segitiga");
+        return bangunSegitiga;
+    }
 }
 
 bangunDatar jajarGenjang(){
@@ -145,9 +154,10 @@ bangunDatar trapesium(){
 
 double input(){
     double num;
-    bool valid = scanf("%lf",&num);
-    clear_buffer();
-    if (valid == 0){
+    char chara;
+    if (scanf("%lf%c",&num,&chara)!= 2 && chara != '\n'){
+        clear_buffer();
+        system("cls");
         printf("Input invalid!\nMasukkan angka : ");
         return input();
     } else {
@@ -159,4 +169,28 @@ void clear_buffer(){
     char c;
     while ((c = getchar()) != '\n' && c != EOF) ; 
     
+}
+
+void reset(){
+
+    int valid_reset;
+    char parameter[1];
+
+    printf("Kembali menghitung?[Y/N] ");
+    gets(parameter);
+    
+    if (!(strcmp(parameter,"Y")) || !(strcmp(parameter,"y"))){
+        
+        system("cls");
+        menu();
+
+    } else if (!(strcmp(parameter,"N")) || !(strcmp(parameter,"n"))){
+        
+        return;
+
+    } else {
+        system("cls");
+        printf("Invalid Input !\n\a");
+        reset();
+    }
 }
