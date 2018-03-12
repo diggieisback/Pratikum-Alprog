@@ -128,7 +128,7 @@ void reset(){
     int valid_reset;
     char parameter[1];
 
-    printf("Kembali menghitung?[Y/N] ");
+    printf("\n\nKembali menghitung?[Y/N] ");
     gets(parameter);
     
     if (!(strcmp(parameter,"Y")) || !(strcmp(parameter,"y"))){
