@@ -65,7 +65,7 @@ void menu(){
                     pilihan = jajarGenjang();
                     break;
             }
-            printf("Bangun datar %s : \nLuas : %.2lf satuan\nKeliling : %.2lf satuan",pilihan.nama,pilihan.luas,pilihan.keliling);
+            printf("\n\nBangun datar %s : \nLuas : %.2lf satuan\nKeliling : %.2lf satuan\n\n",pilihan.nama,pilihan.luas,pilihan.keliling);
             reset();
         }
     }else {
@@ -102,21 +102,23 @@ bangunDatar lingkaran(){
 bangunDatar segitiga(){
     bangunDatar bangunSegitiga;
     double s1,s2,s3,s;
-    printf("Masukkan semua sisi segitiga : ");
+    printf("Masukkan sisi 1 : ");
     s1 = input();
+    printf("Masukkan sisi 2 : ");
     s2 = input();
+    printf("Masukkan sisi 3 : ");
     s3 = input();
     if(s1+ s2 == s3 || s1+s3 == s2 || s2 + s3 ==s1){
         system("cls");
         printf("Input invalid\n");
-        return segitiga();
+        bangunSegitiga = segitiga();
     }else{
         bangunSegitiga.keliling = s1 + s2 + s3;
         s = 0.5 * bangunSegitiga.keliling;
         bangunSegitiga.luas = sqrt(s*(s-s1)*(s-s2)*(s-s3)); 
         strcpy(bangunSegitiga.nama,"Segitiga");
-        return bangunSegitiga;
     }
+    return bangunSegitiga;
 }
 
 bangunDatar jajarGenjang(){
@@ -155,15 +157,15 @@ bangunDatar trapesium(){
 double input(){
     double num;
     char chara;
-    if (scanf("%lf%c",&num,&chara)!= 2 && chara != '\n'){
+    if (scanf("%lf%c",&num,&chara)!= 2 || chara != '\n' || chara == ','){
         clear_buffer();
-        system("cls");
-        printf("Input invalid!\nMasukkan angka : ");
+        printf("Input invalid! Masukkan angka : ");
         return input();
     } else {
         return num;
     }
 }
+
 
 void clear_buffer(){
     char c;
