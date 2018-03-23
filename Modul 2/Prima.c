@@ -3,29 +3,29 @@
 
 int main(){
     int n;
-    printf("Masukkan banyak bilangan: ");
+    int count = 0;
+    int list = 2;
+    printf("Masukkan banyak bilangan : ");
     scanf("%d",&n);
-    int angka[n];
-    bool isPrime[n];
-    printf("Masukkan bilangan :");
-    for(int i = 0; i < n; i++){
-        scanf("%d",&angka[i]);
-    }
-    printf("Bilangan prima yang ada di barisan bilangan tersebut adalah : ");
-    for (int i=0;i < n; i++){
-        for(int j = 2; j < angka[i] ; j++ ){
-            if (angka[i] % j == 0 || angka [i] == 1){
-                isPrime[i] = false;
-                break;
-            } else {
-                isPrime[i] = true;
+    printf("%d bilangan prima pertama : ",n);
+    while (count < n) {
+        bool isprime = true;
+        if (list == 2) {
+            printf("%d ",list);
+            count++;
+        } else {
+            for (int i = 2 ; i < list ; i ++){
+                if (list % i == 0){
+                    isprime = false;
+                    break;
+                }
+            }
+            if (isprime) {
+                printf("%d ",list);
+                count ++;
             }
         }
-    }
-    for (int i=0; i<n ; i++){
-        if (isPrime[i] == true){
-            printf("%d ", angka[i]);
-        }
+        list++;
     }
     return 0;
 }
