@@ -26,24 +26,23 @@ void menu(){
 }
 
 void binaryToDecimal(){
-    int angka;
+    
     int sum = 0;
-    int count=0;
-    printf("Masukkan angka biner : ");
-    scanf("%d",&angka);
-    int sumDiv = angka;
-    int sumMod = angka;
-    if(angka != 0 && angka != 1){
-        do {
-            sumDiv = sumDiv / 10;
-            sumMod = sumMod % 10;
-            if (sumMod == 1){
-                sum = sum + pow(2,count);
-            }
-            count ++;
-        } while(sumDiv != 0);
-    } else {
-        sum = angka;
+    int n,x;
+    printf("Masukkan panjang angka biner : ");
+    scanf("%d",&n);
+    printf("Nilai desimal : ");
+    int angka[n];
+    int count = n-1;
+    for (int i = 0 ; i < n ; i++){
+        scanf("%1d",&x);
+        angka[i] = x;
+    }
+    for (int i = 0 ; i < n ; i ++ ){
+        if (angka[i] == 1){
+            sum = sum + pow(2,count);
+        }
+        count--;
     }
     printf("%d",sum);
 }
@@ -56,20 +55,25 @@ void decimalToBinary(){
     array = malloc(sizeof(int)*10);
     printf("Masukkan angka decimal : ");
     scanf("%d",&angka);
-    int sumDiv = angka;
-    int sumMod = angka;
-    if(angka != 0 && angka != 1){
-        while(sumDiv != 0){
-            sumMod = sumDiv % 2;
-            sumDiv = sumDiv / 2;
-            array[count] = sumMod;
-            count ++;
-        }    
+    printf("Nilai biner : ")
+    if (angka == 0 || angka == 1){
+        printf("%d",angka);
     } else {
-        sum = angka;
+        int sumDiv = angka;
+        int sumMod = angka;
+        if(angka != 0 && angka != 1){
+            while(sumDiv != 0){
+                sumMod = sumDiv % 2;
+                sumDiv = sumDiv / 2;
+                array[count] = sumMod;
+                count ++;
+            }    
+        } else {
+            sum = angka;
+        }
+        for (int i = count-1; i >= 0; i--){
+            printf("%d",array[i]);
+        }
+        free(array);
     }
-    for (int i = count-1; i >= 0; i--){
-        printf("%d",array[i]);
-    }
-    free(array);
 }
