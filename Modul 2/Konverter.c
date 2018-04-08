@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 void menu();
 void binaryToDecimal();
 void decimalToBinary();
+void clear_buffer();
 
 int main(){
     printf("Selamat datang di program konversi biner desimal");
@@ -31,9 +33,9 @@ void binaryToDecimal(){
     int n,x;
     printf("Masukkan panjang angka biner : ");
     scanf("%d",&n);
-    printf("Nilai desimal : ");
     int angka[n];
     int count = n-1;
+    printf("Masukkan angka biner : ");
     for (int i = 0 ; i < n ; i++){
         scanf("%1d",&x);
         angka[i] = x;
@@ -55,7 +57,7 @@ void decimalToBinary(){
     array = malloc(sizeof(int)*10);
     printf("Masukkan angka decimal : ");
     scanf("%d",&angka);
-    printf("Nilai biner : ")
+    printf("Nilai biner : ");
     if (angka == 0 || angka == 1){
         printf("%d",angka);
     } else {
@@ -76,4 +78,14 @@ void decimalToBinary(){
         }
         free(array);
     }
+}
+
+void clear_buffer(){
+
+    char c;
+
+    while ((c = getchar()) != '\n' && c != EOF) ; 
+
+    
+
 }
