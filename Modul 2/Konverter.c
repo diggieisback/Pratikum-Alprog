@@ -29,19 +29,19 @@ void menu(){
 
 void binaryToDecimal(){
     
+    char *p = malloc( sizeof(char) * ( 4) );
+    int len = 0;
     int sum = 0;
-    int n,x;
-    printf("Masukkan panjang angka biner : ");
-    scanf("%d",&n);
-    int angka[n];
-    int count = n-1;
-    printf("Masukkan angka biner : ");
-    for (int i = 0 ; i < n ; i++){
-        scanf("%1d",&x);
-        angka[i] = x;
-    }
-    for (int i = 0 ; i < n ; i ++ ){
-        if (angka[i] == 1){
+    clear_buffer();
+    printf("Masukkan bilangan biner : ");
+    do{
+        scanf("%c",&p[len]);
+        len++;
+    } while(p[len-1] != '\n');
+    int count = len-2;
+    printf("Nilai desimal : ");
+    for (int i = 0 ; i < len ; i ++ ){
+        if (p[i] == '1'){
             sum = sum + pow(2,count);
         }
         count--;
@@ -73,8 +73,13 @@ void decimalToBinary(){
         } else {
             sum = angka;
         }
+        int bagi = 0;
         for (int i = count-1; i >= 0; i--){
             printf("%d",array[i]);
+            bagi++;
+            if (bagi%4 == 0){
+                printf(" ");
+            }
         }
         free(array);
     }
