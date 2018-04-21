@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 void menu();
 void binaryToDecimal();
 void decimalToBinary();
@@ -39,10 +40,11 @@ void binaryToDecimal(){
         len++;
     } while(p[len-1] != '\n');
     int count = len-2;
-    printf("Nilai desimal : ");
     for (int i = 0 ; i < len ; i ++ ){
         if (p[i] == '1'){
             sum = sum + pow(2,count);
+        } else if(p[i] != '0'){
+
         }
         count--;
     }
