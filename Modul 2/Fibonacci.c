@@ -14,9 +14,9 @@ void menu(){
     int choice;
     int n;
     printf("Menu :\n1.Fibonacci iteratif\n2.Fibonacci rekursif\n3.Exit Program\n\nMasukkan pilihan : ");
-    scanf("%d",&choice);
+    choice = input();
     printf("Masukkan panjang deret : ");
-    scanf("%d",&n);
+    n = input();
     switch(choice){
         case 1:
             arrayIter(n);
@@ -57,6 +57,28 @@ void arrayIter(int n){
             array[i] = array[i-1] + array[i-2];
         }
         printf("%d ",array[i]);
+    }
+
+}
+
+double input(){
+
+    double num;
+
+    char chara;
+
+    if (scanf("%lf%c",&num,&chara)!= 2  || chara != '\n' || chara == ','){
+
+        clear_buffer();
+
+        printf("Input invalid! Masukkan angka : ");
+
+        return input();
+
+    } else {
+
+        return num;
+
     }
 
 }
