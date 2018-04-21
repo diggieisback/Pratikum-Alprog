@@ -291,11 +291,11 @@ double input(){
 
     char chara;
 
-    if (scanf("%lf%c",&num,&chara)!= 2 || num<=0|| chara != '\n' || chara == ','){
-		
-		fflush(stdin);
+    if (scanf("%lf%c",&num,&chara)!= 2  || chara != '\n' || chara == ','){
 
-        printf("Input invalid! Masukkan angka yang benar : ");
+        clear_buffer();
+
+        printf("Input invalid! Masukkan angka : ");
 
         return input();
 
@@ -306,7 +306,6 @@ double input(){
     }
 
 }
-
 
 
 
