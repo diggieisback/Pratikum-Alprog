@@ -30,7 +30,7 @@ void menu(){
 
 void binaryToDecimal(){
     
-    char *p = malloc( sizeof(char) * ( 4) );
+    char *p = malloc( sizeof(char) * (4) );
     int len = 0;
     int sum = 0;
     clear_buffer();
@@ -39,13 +39,12 @@ void binaryToDecimal(){
         scanf("%c",&p[len]);
         len++;
     } while(p[len-1] != '\n');
+    //101
     int count = len-2;
     for (int i = 0 ; i < len ; i ++ ){
         if (p[i] == '1'){
             sum = sum + pow(2,count);
-        } else if(p[i] != '0'){
-
-        }
+        } 
         count--;
     }
     printf("%d",sum);
