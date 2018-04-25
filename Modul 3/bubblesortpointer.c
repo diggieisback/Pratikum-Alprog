@@ -64,7 +64,6 @@ float countBubbleSortPointer(int arr[],int n){
     return seconds;
 }
 
-
 void menu(){
 
     float choice;

@@ -64,6 +64,7 @@ void menu(){
 
             }
             printf("%.2lf",hasil);
+            reset();
         }
      }else {
 
