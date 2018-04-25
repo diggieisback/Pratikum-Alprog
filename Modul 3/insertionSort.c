@@ -298,7 +298,7 @@ double input(){
     double num;
     char chara;
     if (scanf("%lf%c",&num,&chara)!= 2 || num<=0 || chara != '\n' || chara == ','){
-        fflush(stdin);
+        clear_buffer();
         printf("Input invalid! Masukkan angka yang benar : ");
         return input();
     } else {
