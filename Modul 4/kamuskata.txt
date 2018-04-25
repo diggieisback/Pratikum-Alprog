@@ -1,0 +1,10 @@
+malam a=2 l=1 m=2 Palindrome
+katak a=2 k=2 t=1 Palindrome
+malam a=2 l=1 m=2 Palindrome
+saya a=2 s=1 y=1 Tidak Palindrome
+s a y a  =3 a=2 s=1 y=1 Tidak Palindrome
+saya  Spasi=1 a=2 s=1 y=1 Tidak Palindrome
+sa ya Spasi=1 a=2 s=1 y=1  Tidak Palindrome
+malam ini Spasi=1 a=2 i=2 l=1 m=2 n=1  Tidak Palindrome
+kasur ini rusak Spasi=2 a=2 i=2 k=2 n=1 r=2 s=2 u=2  Palindrome
+
