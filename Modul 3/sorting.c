@@ -22,6 +22,8 @@ void menu();
 void menu2(int arr[],int n);
 void reset();
 double input();
+void dupArray(int source[],int target[], int n);
+void clear_buffer();
 
 
 
@@ -144,8 +146,6 @@ float countBubbleSort(int arr[],int n){
     bubbleSort(arr,n);
     clock_t end = clock();
     float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-    printf("Hasil Sorting :");
-    printArray(arr,n);
     return seconds;
 }
 
@@ -154,8 +154,6 @@ float countInsertionSort(int arr[],int n){
     insertionSort(arr,n);
     clock_t end = clock();
     float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-    printf("Hasil Sorting :");
-    printArray(arr,n);
     return seconds;
 }
 
@@ -164,14 +162,11 @@ float countQuickSort(int arr[],int n){
     quickSort(arr,0,n-1);
     clock_t end = clock();
     float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-    printf("Hasil Sorting :");
-    printArray(arr,n);
     return seconds;
 }
 
 float countSequentialSearch(int arr[],int n,int angka){
     int inArray;
-    quickSort(arr,0,n-1);
     clock_t start = clock();
     inArray = sequentialSearch(arr,n,angka);
     clock_t end = clock();
@@ -190,6 +185,8 @@ void printArray(int arr[], int n){
        printf("%d ", arr[i]);
    printf("\n");
 }
+
+
 
 void menu(){
 
@@ -218,7 +215,7 @@ void menu(){
                     n = 16000;
                     break;
                 case 3: ;
-                    n = 64000;
+                    n = 100000;
                     break;
             }
         }
@@ -241,15 +238,16 @@ void menu2(int arr[],int n){
         
     float choice;
     int check;
-    float seconds;
+    float seconds1,seconds2,seconds3;
     int angka;
-
-    printf("Pilih metode yang diuji :\n\n1.Insertion Sort\n2.Bubble Sort\n3.Quick Sort\n4.Sequential Search\n5.Binary Search\n6.Exit Program\n\nPilihan :");
+    int arr2[n];
+    int arr3[n];
+    printf("Pilih metode yang diuji :\n\n1.Sorting(Bubble Sort,Insertion Sort,Quick Sort)\n2.Searching(Binary Search,SequentialSearch)\n3.Exit Program\n\nPilihan :");
     choice = input();
     check = ceil(choice);
     if (check == choice){
-        if (choice>5 || choice < 1){
-                if (choice == 6){
+        if (choice>2 || choice < 1){
+                if (choice == 3){
                         return;
                 } else {
                     system("cls");
@@ -257,30 +255,34 @@ void menu2(int arr[],int n){
                     menu();
                 }
         } else {
-            if(choice == 4 || choice == 5){
+            printf("Array %d data random sebelum di sort :\n");
+            printArray(arr,n);
+            if(choice ==2){
                 printf("Masukkan angka yang dicari : ");
                 angka = input();
             }
+            dupArray(arr,arr2,n);
+            dupArray(arr,arr3,n);
             switch ((int)choice)
             {
                 case 1:
-                    seconds = countInsertionSort(arr,n);
+                    seconds1 = countInsertionSort(arr,n);
+                    seconds2 = countBubbleSort(arr2,n);
+                    seconds3 = countQuickSort(arr3,n);
                     break;
                 case 2:
-                    seconds = countBubbleSort(arr,n);
-                    break;
-                case 3:
-                    seconds = countQuickSort(arr,n);
-                    break;
-                case 4:
-                    seconds = countSequentialSearch(arr,n,angka);
-                    break;
-                case 5:
-                    seconds = countBinarySearch(arr,n,angka);
+                    seconds1 = countSequentialSearch(arr,n,angka);
+                    seconds2 = countBinarySearch(arr2,n,angka);
                     break;
             }
         }
-        printf("\nWaktu yang diperlukan : %lf",seconds);
+        printf("Array %d data random sesudah di sort :\n");
+        printArray(arr2,n);
+        if(choice == 1){
+            printf("Waktu Quick Sort : %lf\nWaktu Insertion Sort : %lf\nWaktu Bubble Sort : %lf",seconds3,seconds1,seconds2);
+        } else if(choice == 2) {
+            printf("Waktu Sequential Search : %lf\nWaktu Binary Search :%lf",seconds1,seconds2);
+        }
         reset();
     } else {
 
@@ -304,6 +306,11 @@ double input(){
     } else {
         return num;
     }
+}
+
+void dupArray(int source[],int target[], int n){
+    for(int i = 0; i < n ; i++)
+        target[i] = source[i];
 }
 
 void clear_buffer(){
