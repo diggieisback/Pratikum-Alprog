@@ -26,7 +26,7 @@ int main(){
     } else {
         employee.gajiHarian = employee.gajiPerJam * employee.jamKerja;
     }
-    printf("Gaji harian pegawai : %d",employee.gajiHarian);
+    printf("Gaji per jam : %d\nGaji harian pegawai : %d\n",employee.gajiPerJam,employee.gajiHarian);
     reset();
 }
 
